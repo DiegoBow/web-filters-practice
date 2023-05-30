@@ -3,7 +3,6 @@ var grayImg = null; //Filter
 var redImg = null; //Filter
 var frameImg = null; //Filter
 var barsImg = null; //Filter
-var blurImg = null; // Filter
 var canvas = null;
 var red;
 var green;
@@ -34,7 +33,7 @@ function grayScale() {
 }
 
 function randomNum(){ //Obtener un rango de -10 a 10
-  var range = 10;
+  var range = 20;
   var rdmPos;
   var rdmNeg;
   rdmPos = Math.round(Math.random()*range); // rango de 0 a 10
@@ -42,17 +41,33 @@ function randomNum(){ //Obtener un rango de -10 a 10
   return rdmPos+rdmNeg; // sumamos para obtener un número de -10 a 10
 }
 
-function validPx(num, max){ //devuelve un px dentro del rango del tamaño de imágen
-    if(num<0){
+function validPx(pixelXY, max){ //devuelve un px dentro del rango del tamaño de imágen
+    if(pixelXY<0){
       return 0;
-    } else if(num>max){
+    } else if(pixelXY>max){
       return max;
-  }
+    } else {
+      return pixelXY;
+    }
 }
 
 function doBlur(){
   if(isLoaded(blurImg)){
-    
+    var blank = new SimpleImage(originalImg.getWidth(), originalImg.getHeight());
+    var w = originalImg.getWidth();
+    var h = originalImg.getHeight();
+    for(var px of blurImg.values()){
+      var x = px.getX();
+      var y = px.getY();
+      var rx = px.getX()+randomNum();
+      var ry = px.getY()+randomNum();
+      if(rx>=0 && rx<=w-1 && ry>=0 && ry<=h-1){
+        blank.setPixel(x, y, originalImg.getPixel(rx, ry));
+      } else {
+        blank.setPixel(x, y, originalImg.getPixel(validPx(rx, w-1), validPx(ry, h-1)));
+      }
+    }
+    blank.drawTo(canvas); 
   }
 }
 
