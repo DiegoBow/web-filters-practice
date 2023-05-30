@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width-device-width, initial-scale=1.0">
+  <title>Filtrando ando</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <script src="funciones.js"></script>
+  <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+
+  <div>
+    <h1>FILTREA</h1>
+  </div>
+
+  <div id="divLienzo">
+    <canvas id="lienzo"></canvas>
+  </div>
+  
+  <div>
+    <p class="title">Subir archivo:</p>
+    <input type="file" id="upload" multiple="false" accept="image/*" onchange="loadImage()">
+    <div>
+      <p class="title">Filtros:</p>
+      <input type="button" id="grayscl" value="Escala de grises" onclick="grayScale()">
+      <input type="button" id="redfilter" value="Rojo" onclick="redFilter()">
+    <p>
+      <input type="button" id="frame" value="Marco" onclick="romboFilter()">
+      <input type="button" id="doBars" value="Crear barras" onclick="doBars()">
+      <input type="button" id="blur" value="Desenfocado" onclick="doBlur()">
+    </p>
+    </div>
+    <p class="title">Combinar filtros:</p>
+    <input type="button" value="Combinar" onclick="combineFilters()">
+  </div>
+</body>
+</html>
